@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <link rel="icon" href="./assets/2nd_monthsary_icon.png" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    <!-- ============================================= {CSS} ============================================= -->
     <style>
         html, body {
             width: 100%;
@@ -41,12 +43,13 @@
             animation: fadeIn 1s ease-in 0.5s forwards;
             position: absolute;
             left: 50%;
-            top: 50%;
+            top: 48%;
             transform: translate(-50%, -50%);
+            cursor: pointer;
         }
 
         #messageBox {
-            width: 70%;
+            width: 80%; /* Increased from 70% */
             margin-top: auto;
             margin-bottom: 40px;
             padding: 20px 0;
@@ -58,51 +61,98 @@
             opacity: 0;
             animation: fadeIn 1s ease-in 1s forwards;
             position: relative;
+            min-height: 50px; /* Ensure minimum height */
         }
 
-        .arrow{
+
+        #message {
+            text-align: center;
+            font-size: 24px;
+            flex-grow: 1;
+            width: 100%;
+            max-width: 90%; /* Increased from 80% */
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 80px; /* Increased padding for arrows */
+            box-sizing: border-box;
+        }
+
+        .message-container {
+            width: 100%;
+            text-align: center;
+            line-height: 1.8; /* Increased line height */
+            display: inline-block;
+            position: relative;
+            padding: 10px 0;
+        }
+        
+        .text-wrapper {
+            width: 100%;
+            display: inline-block;
+            white-space: normal;
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: none; /* Prevent hyphenation */
+        }
+
+        
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            white-space: normal; /* Changed from pre-wrap */
+            margin: 0 0.8px; /* Slightly increased letter spacing */
+        }
+
+        /*  .letter.space {
+                margin-right: 0.3em; /* Adjusted word spacing 
+                display: inline-block;
+                width: auto;
+                height: auto;
+        } */
+
+        .letter.space {
+            margin-right: 0.35em; /* Adjusted word spacing */
+            display: inline-block;
+            width: auto;
+        }
+
+
+        .arrow {
             font-size: 50px;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             transition: 0.1s;
             font-family: 'Zapf Dingbats' !important;
-            user-select: none; /* Prevent text selection */
-            -webkit-user-select: none; /* For Safari */
-            -ms-user-select: none; /* For older IE */
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            z-index: 2; /* Ensure arrows stay above text */
         }
 
-        .arrow:hover{
+        .arrow:hover {
             cursor: pointer;
         }
 
-
-        #leftArrow{
-            left: 0;
+        #leftArrow {
+            left: 20px; /* Adjusted position */
             transform: translateY(-50%) scaleX(-1);
         }
 
-        #leftArrow:active{
+        #leftArrow:active {
             scale: 1.1;
         }
 
-        #rightArrow{
-            right: 0;
+        #rightArrow {
+            right: 20px; /* Adjusted position */
         }
 
-        #rightArrow:active{
+        #rightArrow:active {
             scale: 1.1;
-        }
-
-        #message {
-            text-align: center;
-            font-size: 24px;
-            flex-grow: 1;
-            max-width: 80%;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         #counter {
@@ -124,35 +174,136 @@
             to { opacity: 1; }
         }
 
+        /* Large devices (desktops, less than 1200px) */
+        @media (max-width: 1200px) {
+            #title {
+                font-size: 70px;
+                margin-top: 30px;
+            }
+            #flower {
+                height: 55%;
+            }
+        }
+
+        /* Medium devices (tablets, less than 768px) */
         @media (max-width: 768px) {
             #title {
-                font-size: 80px;
-                margin-top: 90px;
-                opacity: 0;
-                animation: fadeIn 1s ease-in forwards;
+                font-size: 60px;
+                margin-top: 80px;
             }
-            #messageBox {
-                width: 90%;
+            #message {
+                font-size: 20px;
+                padding: 0 60px;
+            }
+            #flower {
+                height: 50%;
+                top: 45%;
+            }
+            .arrow {
+                font-size: 40px;
+            }
+        }
+
+        /* Small devices (large phones, less than 600px) */
+        @media (max-width: 600px) {
+            #title {
+                font-size: 50px;
+                margin-top: 60px;
             }
             #message {
                 font-size: 18px;
+                padding: 0 50px;
+            }
+            #flower {
+                height: 45%;
+            }
+            .arrow {
+                font-size: 35px;
+            }
+        }
+
+        /* Extra small devices (phones, less than 480px) */
+        @media (max-width: 480px) {
+            #title {
+                font-size: 40px;
+                margin-top: 40px;
+            }
+            #message {
+                font-size: 16px;
+                padding: 0 40px;
+            }
+            #flower {
+                height: 40%;
+                top: 42%;
             }
             .arrow {
                 font-size: 30px;
             }
+            #messageBox {
+                margin-bottom: 30px;
+            }
+            #date, #counter {
+                font-size: 12px;
+            }
+        }
+
+        /* Very small devices (small phones, less than 360px) */
+        @media (max-width: 360px) {
+            #title {
+                font-size: 35px;
+            }
+            #message {
+                font-size: 15px;
+                padding: 0 30px;
+            }
             #flower {
-                height: 60%;
-                width: auto;
-                object-fit: contain;
+                height: 35%;
+            }
+            .arrow {
+                font-size: 25px;
+            }
+        }
+
+        /* Landscape orientation - for devices with height less than 500px */
+        @media (max-height: 500px) and (orientation: landscape) {
+            #title {
+                font-size: 40px;
                 margin-top: 20px;
-                opacity: 0;
-                animation: fadeIn 1s ease-in 0.5s forwards;
-        
+            }
+            #flower {
+                height: 70%;
+                top: 55%;
+            }
+            #messageBox {
+                margin-bottom: 20px;
+            }
+            #message {
+                font-size: 14px;
+            }
+        }
+
+        /* Devices with short height (less than 600px) */
+        @media (max-height: 600px) {
+            #title {
+                margin-top: 20px;
+            }
+            #flower {
+                height: 50%;
+            }
+            #messageBox {
+                margin-bottom: 30px;
             }
         }
     </style>
 </head>
+
+    <!-- ============================================={body} ============================================= -->
 <body>
+
+    <audio id="backgroundMusic" loop>
+        <source src="./assets/Through The Years.mp3" type="audio/mpeg">
+    </audio>
+
     <div id="wrapper">
         <div id="title">I love you</div>
         <img id="flower" src="./assets/sunflower.gif" alt="Sunflower">
@@ -164,10 +315,31 @@
             <div id="counter"></div>
         </div>
     </div>
-
+    
+    <!-- ============================================= {CSS} ============================================= -->
     <script>
+
+        // After your existing script, add:
+        document.addEventListener('DOMContentLoaded', function() {
+            const music = document.getElementById('backgroundMusic');
+            
+            // Function to play music
+            function playMusic() {
+                music.play().catch(function(error) {
+                    console.log("Play failed:", error);
+                });
+            }
+
+            // Play on first user interaction with the page
+            document.body.addEventListener('click', function() {
+                playMusic();
+            }, { once: true }); // Remove listener after first click
+        });
+
         const messages = [
-            "Hiii, baby. Happy 2nd monthsary. The way you sometimes cut off the excitement when I’m planning a surprise for you—ewan ko, natatawa na lang ako bwahahahahahahahahaha—it lights up my day.",
+            "Hiii, baby. Happy 2nd monthsary!",
+            "The way you sometimes cut off the excitement when I’m planning a surprise for you",
+            "bwahahahahahahahahaha, natatawa na lang ako—it lights up my day.",
             "Two months of your voice being my favorite sound. Let’s keep collecting these quiet moments.",
             "You’re my person—the one I want to tell about the weird leaf I saw on the sidewalk. Always.",
             "I don’t just love you; I love how you pause mid-sentence just to say you love me. Stay exactly you.",
@@ -237,23 +409,93 @@
         const counter = document.getElementById('counter');
         const date = document.getElementById('date');
 
-        function updateMessage() {
-            message.textContent = messages[currentIndex];
-            counter.textContent = `${currentIndex + 1}/${messages.length}`;
-            const today = new Date();
-            date.textContent = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
+        function createLetterSpans(text) {
+            const words = text.split(' ');
+            const spans = [];
+            
+            words.forEach((word, wordIndex) => {
+                // Create a wrapper for each word to prevent breaking
+                const wordWrapper = document.createElement('span');
+                wordWrapper.style.display = 'inline-block';
+                wordWrapper.style.whiteSpace = 'nowrap';
+                
+                // Handle each letter in the word
+                const letterSpans = word.split('').map(char => {
+                    const span = document.createElement('span');
+                    span.className = 'letter';
+                    span.textContent = char;
+                    return span;
+                });
+        
+        letterSpans.forEach(span => wordWrapper.appendChild(span));
+        spans.push(wordWrapper);
+        
+        // Add space after each word (except the last)
+        if (wordIndex < words.length - 1) {
+            const spaceSpan = document.createElement('span');
+            spaceSpan.className = 'letter space';
+            spaceSpan.innerHTML = '&nbsp;';
+            spans.push(spaceSpan);
         }
+    });
+    
+    return spans;
+}
+
+function updateMessage(direction = 'right') {
+    message.innerHTML = '';
+    
+    // Create container for better text wrapping
+    const textContainer = document.createElement('div');
+    textContainer.className = 'message-container';
+    
+    // Create wrapper for the text
+    const textWrapper = document.createElement('div');
+    textWrapper.className = 'text-wrapper';
+    
+    const letterSpans = createLetterSpans(messages[currentIndex]);
+    letterSpans.forEach(span => textWrapper.appendChild(span));
+    
+    textContainer.appendChild(textWrapper);
+    message.appendChild(textContainer);
+    
+    // Update counter and date
+    counter.textContent = `${currentIndex + 1}/${messages.length}`;
+    const today = new Date();
+    date.textContent = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
+    
+    // Animate letters
+    animateLetters();  
+}
+
+function animateLetters() {
+    anime.timeline({loop: false})
+        .add({
+            targets: '.letter',
+            translateY: [20, 0],
+            opacity: [0, 1],
+            easing: "easeOutExpo",
+            duration: 1200,
+            delay: (el, i) => 25 * i,
+            complete: function() {
+                // Ensure proper final state
+                document.querySelectorAll('.letter').forEach(letter => {
+                    letter.style.opacity = '1';
+                    letter.style.transform = 'translateY(0)';
+                });
+            }
+        });
+}
 
         leftArrow.addEventListener('click', () => {
             currentIndex = (currentIndex - 1 + messages.length) % messages.length;
-            updateMessage();
+            updateMessage('left');
         });
 
         rightArrow.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % messages.length;
-            updateMessage();
+            updateMessage('right');
         });
-
 
         // Initialize first message
         updateMessage();
